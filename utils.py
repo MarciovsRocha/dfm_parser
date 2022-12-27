@@ -67,5 +67,16 @@ def NullOrEmpty(var: any):
     return var is None
 
 
+# -----------------------------------------------
+# Adicionar apostrofos na string
+def SingleQuoteStr(string: str):
+    return f'\'{string}\''
+
+
+# -----------------------------------------------
+# adicionar aspas na string
+def DoubleQuoteStr(string: str):
+    return f'"{string}"'
+
 # some Variables
 PROJ_PATH = get_project_path()
