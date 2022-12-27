@@ -101,7 +101,5 @@ class DFMParser():
                         field.new_property(Property(name=val, value=item[val]))
                 self.__fields.append(field)              
                 item = {}
-#        for att in lista_atributos.get_properties():
-#            print(att)                
         self.close_file()            
         return lista_atributos
