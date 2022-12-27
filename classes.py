@@ -13,7 +13,7 @@ class Property():
     __properties_names: list
     # public definitions
     name: str
-    value: any
+    value: any = None
     # -----------------------------------------------
     # constructor
     def __init__(self, **kwargs):
@@ -66,3 +66,17 @@ class Property():
         elif name not in self.__properties_names:
             raise AttributeError(f'Atributo com o nome "{name}" nao existe no objeto atual.')
         return self.__properties[self.properties_names.index(name)].value
+
+    # -----------------------------------------------
+    # exports property to JSON object
+    def to_json(self, **kwargs):
+        json_prop = {'name': '', 'value': ''}
+        json_prop['name'] = self.name
+        if self.value is not None:
+            if 'Property' == type(self.value):
+                json_prop['value'] = self.value.to_json()
+            else:
+                json_prop['value'] = self.value
+        for item in self.__properties_names:
+            json_prop[item] = self.__properties[self.__properties_names.index(item)].to_json()
+        return json_prop
