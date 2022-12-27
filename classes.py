@@ -62,7 +62,7 @@ class Property():
     # return property value
     def get_property(self, name: str):
         if self.exists_property(name):
-            return self.__properties[self.properties_names.index(name)].value
+            return self.__properties[self.__properties_names.index(name)].value
 
     # -----------------------------------------------
     # exports property to JSON object
