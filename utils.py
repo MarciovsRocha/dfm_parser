@@ -78,5 +78,49 @@ def SingleQuoteStr(string: str):
 def DoubleQuoteStr(string: str):
     return f'"{string}"'
 
+
+# ----------------------------------------------------------
+# creates new Field Def string
+def new_field(dict_obj: dict):
+    field_def = Template(TAB+'CDS.FieldDefs.Add(${name}, ${type}, ${size});') if 'size' in dict_obj else Template(TAB+'CDS.FieldDefs.Add(${name}, ${type});')
+    return field_def.safe_substitute(dict_obj)
+
+
+# ----------------------------------------------------------
+# creates new Field Def string
+def FieldTypeDef(t: str):    
+    return DELPHI_TYPES[t.lower()]
+
+
+def CriarEstruturaLocal(lista_atributos: list, lista_fields: list):
+    doby_estrutura_local = ''
+    for att in lista_atributos:
+        my_dict = {}
+        if att.exists_property('DataField'):        
+            my_dict['name'] = SingleQuoteStr(att.name)
+            att_field = att.get_property('DataField')
+            for field in lista_fields:
+                if att_field == field.name:
+                    my_dict['type'] = FieldTypeDef(field.get_property('type'))
+                    if field.exists_property('Size'):
+                        my_dict['size'] = field.get_property('Size')
+                    break
+            doby_estrutura_local += new_field(dict_obj=my_dict)+'\n'
+
+
 # some Variables
 PROJ_PATH = get_project_path()
+# tabulation
+TAB = (' '*2)
+# Delphi Field Types
+DELPHI_TYPES = {
+        'tintegerfield': 'ftInteger'
+        , 'tstringfield': 'ftString'
+        , 'twordfield': 'ftWord'
+        , 'tbcdfield': 'ftBCD'
+        , 'tdatetimefield': 'ftDateTime'
+        , 'tdatefield': 'ftDate'
+        , 'tsmallintfield': 'ftSmallint'
+        , 'tmemofield': 'ftMemo'
+    }
+        
