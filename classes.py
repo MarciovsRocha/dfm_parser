@@ -64,5 +64,5 @@ class Property():
         if '' == name:
             raise AttributeError('Atributo "nome" nao informado para o funcao "get_property".')
         elif name not in self.__properties_names:
-            raise AttributeError(f'Atributo com o nome "{nome}" nao existe no objeto atual.')
+            raise AttributeError(f'Atributo com o nome "{name}" nao existe no objeto atual.')
         return self.__properties[self.properties_names.index(name)].value
