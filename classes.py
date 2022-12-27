@@ -61,11 +61,8 @@ class Property():
     # -----------------------------------------------
     # return property value
     def get_property(self, name: str):
-        if '' == name:
-            raise AttributeError('Atributo "nome" nao informado para o funcao "get_property".')
-        elif name not in self.__properties_names:
-            raise AttributeError(f'Atributo com o nome "{name}" nao existe no objeto atual.')
-        return self.__properties[self.properties_names.index(name)].value
+        if self.exists_property(name):
+            return self.__properties[self.properties_names.index(name)].value
 
     # -----------------------------------------------
     # exports property to JSON object
@@ -80,3 +77,10 @@ class Property():
         for item in self.__properties_names:
             json_prop[item] = self.__properties[self.__properties_names.index(item)].to_json()
         return json_prop
+
+    # -----------------------------------------------
+    # verify if exists specified property
+    def exists_property(self, name: str=''):
+        if '' == name:
+            raise AttributeError('Atributo "nome" nao informado para o funcao "get_property".')
+        return  name in self.__properties_names
