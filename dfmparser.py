@@ -103,3 +103,13 @@ class DFMParser():
                 item = {}
         self.close_file()            
         return lista_atributos
+
+    # -----------------------------------------------
+    # retorna a lista de atributos
+    def get_lista_atributos(self):
+        return self.__atributos
+
+    # -----------------------------------------------
+    # retorna a lista de fields 
+    def get_lista_fields(self):
+        return self.__fields
