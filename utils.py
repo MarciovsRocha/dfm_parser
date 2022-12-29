@@ -93,7 +93,7 @@ def FieldTypeDef(t: str):
 
 
 def CriarEstruturaLocal(lista_atributos: list, lista_fields: list):
-    doby_estrutura_local = ''
+    body_estrutura_local = ''
     for att in lista_atributos:
         my_dict = {}
         if att.exists_property('DataField'):        
@@ -105,7 +105,8 @@ def CriarEstruturaLocal(lista_atributos: list, lista_fields: list):
                     if field.exists_property('Size'):
                         my_dict['size'] = field.get_property('Size')
                     break
-            doby_estrutura_local += new_field(dict_obj=my_dict)+'\n'
+            body_estrutura_local += new_field(dict_obj=my_dict)+'\n'
+    return body_estrutura_local
 
 
 # some Variables
