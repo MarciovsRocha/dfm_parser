@@ -108,7 +108,7 @@ class DFMParser():
             if fields_prop and ('=' in line):
                 name, value = line.replace(' ', '').replace('\'','').split('=')
                 item[name] = value
-            elif fields_prop and ('end' in line.lower()):
+            elif fields_prop and ('end' == line.lower().replace(' ', '').strip()):
                 fields_prop = False
                 field = Property(name=item['FieldName'])
                 for val in item:
