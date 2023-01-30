@@ -23,22 +23,23 @@ class Property():
         if 'name' not in kwargs:
             raise AttributeError('Atributo "name" nao definido para construtor da classe "Property".')
         if 'value' in kwargs:
-            self.value=kwargs['value']            
+            self.value=kwargs['value']
         self.name=kwargs['name']
 
     # -----------------------------------------------
     def get_properties(self):
         """ get properties from actual object """
         return self.__properties
-   
+
     # -----------------------------------------------
-    def new_property(self, property):        
+    def new_property(self, prop):
         """ add new property Object to current object """
-        if property.name not in self.__properties_names:
-            self.__properties_names.append(property.name)
-            self.__properties.append(property)
+        if prop.name not in self.__properties_names:
+            self.__properties_names.append(prop.name)
+            self.__properties.append(prop)
         else:
-            raise NameError(f'Ja existe uma propriedade com nome "{property.name}" definida para o objeto atual.')
+            msg = f'Ja existe uma propriedade com nome "{prop.name}" definida para o objeto atual.'
+            raise NameError(msg)
         return self
 
     # -----------------------------------------------
@@ -66,7 +67,7 @@ class Property():
             return self.__properties[self.__properties_names.index(name)].value
 
     # -----------------------------------------------
-    def to_json(self, **kwargs):
+    def to_json(self):
         """ exports property to JSON object """
         json_prop = {'name': '', 'value': ''}
         json_prop['name'] = self.name

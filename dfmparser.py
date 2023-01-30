@@ -91,7 +91,7 @@ class DFMParser():
             elif atrib_prop and item_prop and ('end' in line.lower()):
                 item_prop = False
                 atributo = Property(name=item['Nome'])
-                for val in item:
+                for val in item.items():
                     if 'nome' not in val.lower():
                         atributo.new_property(Property(name=val, value=item[val]))
                 item = {}
@@ -111,7 +111,7 @@ class DFMParser():
             elif fields_prop and ('end' in line.lower()):
                 fields_prop = False
                 field = Property(name=item['FieldName'])
-                for val in item:
+                for val in item.items():
                     if 'fieldname' not in val.lower():
                         field.new_property(Property(name=val, value=item[val]))
                 self.__fields.append(field)
