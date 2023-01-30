@@ -60,7 +60,7 @@ def get_project_path():
 
 
 # -----------------------------------------------
-# verificar se a vari·vel est· nula ou vazia
+# verificar se a vari√°vel est√° nula ou vazia
 def NullOrEmpty(var: any):
     if type(var) in [str, list, tuple]:
         return (0 == len(var)) or (var is None)
