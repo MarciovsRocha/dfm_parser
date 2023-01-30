@@ -5,35 +5,30 @@
 # ----------------------------------------------------------
 
 # ----------------------------------------------------------
-# imports 
+# imports
 from dfmparser import DFMParser
-from utils import PROJ_PATH, CriarEstruturaLocal
+from utils import CriarEstruturaLocal
 
 # ----------------------------------------------------------
 # CONSTANTS
 # Delpgi Form File path
 # file = PROJ_PATH+'\CPlanoInativo.dfm'
-comom_path = ''
 
-# classe = str(input('Exemplo: CPlanoinativo.dfm\nDigite o nome do arquivo DFM sua classe:\n'))
-classe = 'C:\Projetos\HomePar\master\Fontes\Comum\Classes\CplanoInativo.dfm'
-
-file: str
+CLASSE = str(input('Exemplo: CPlanoinativo.dfm\nDigite o nome do arquivo DFM sua classe:\n'))
 
 try:
-    classe.index('.dfm')
-    file = comom_path+classe
-except:
-    file = comom_path+classe+'.dfm'
+    CLASSE.index('.dfm')
+except ValueError:
+    CLASSE = CLASSE+'.dfm'
 
 # ----------------------------------------------------------
 # main script 
-parser = DFMParser(file_path = file)
+parser = DFMParser(file_path = CLASSE)
 parser.parse()
 lista_atributos = parser.get_lista_atributos()
 lista_fields = parser.get_lista_fields()
 estrutura_local = CriarEstruturaLocal(lista_atributos=lista_atributos, lista_fields=lista_fields)
-arquivo_exportado = 'estrutura_local.txt'
-with open(arquivo_exportado, 'w') as fwrite:
+ARQUIVO_EXPORTADO = 'estrutura_local.txt'
+with open(ARQUIVO_EXPORTADO, 'w', encoding='utf-8') as fwrite:
     fwrite.write(estrutura_local)
-input(f'Arquivo exportado para: {arquivo_exportado}\nAperte [Enter] para finalizar.')
+input(f'Arquivo exportado para: {ARQUIVO_EXPORTADO}\nAperte [Enter] para finalizar.')

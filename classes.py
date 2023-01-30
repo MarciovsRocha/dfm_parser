@@ -1,13 +1,14 @@
-# ----------------------------------------------------------
-# created by: dev.marcio.rocha@gmail.com
-# date: 26-12-2022
-# observation: Delphi Form Files parser
-# ----------------------------------------------------------
-
+"""
+----------------------------------------------------------
+created by: dev.marcio.rocha@gmail.com
+date: 26-12-2022
+observation: Delphi Form Files parser
+----------------------------------------------------------
+"""
 
 # -----------------------------------------------
-# Delphi Form File Parser 
 class Property():
+    """ Delphi Form File Parser """
     # private definitions
     __properties: list
     __properties_names: list
@@ -26,13 +27,13 @@ class Property():
         self.name=kwargs['name']
 
     # -----------------------------------------------
-    # get properties from actual object
     def get_properties(self):
+        """ get properties from actual object """
         return self.__properties
-    
+   
     # -----------------------------------------------
-    # add new property Object to current object
     def new_property(self, property):        
+        """ add new property Object to current object """
         if property.name not in self.__properties_names:
             self.__properties_names.append(property.name)
             self.__properties.append(property)
@@ -41,8 +42,8 @@ class Property():
         return self
 
     # -----------------------------------------------
-    # remove property Object from current object
     def remove_property(self, name: str):
+        """ remove property Object from current object """
         if '' == name:
             raise AttributeError('Atributo "name" nao informado para funcao "remove_property".')
         if name not in self.__properties_names:
@@ -53,20 +54,20 @@ class Property():
         return self
 
     # -----------------------------------------------
-    # remove property Object from current object
     def __str__(self):
-        s = f'{self.name}'
-        return s
+        """ remove property Object from current object """
+        string = f'{self.name}'
+        return string
 
     # -----------------------------------------------
-    # return property value
     def get_property(self, name: str):
+        """ return property value """
         if self.exists_property(name):
             return self.__properties[self.__properties_names.index(name)].value
 
     # -----------------------------------------------
-    # exports property to JSON object
     def to_json(self, **kwargs):
+        """ exports property to JSON object """
         json_prop = {'name': '', 'value': ''}
         json_prop['name'] = self.name
         if self.value is not None:
@@ -79,8 +80,8 @@ class Property():
         return json_prop
 
     # -----------------------------------------------
-    # verify if exists specified property
     def exists_property(self, name: str=''):
+        """ verify if exists specified property """
         if '' == name:
             raise AttributeError('Atributo "nome" nao informado para o funcao "get_property".')
         return  name in self.__properties_names

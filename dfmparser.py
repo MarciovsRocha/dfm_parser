@@ -1,8 +1,10 @@
-# ----------------------------------------------------------
-# created by: dev.marcio.rocha@gmail.com
-# date: 26-12-2022
-# observation: Delphi Form Files parser
-# ----------------------------------------------------------
+"""
+----------------------------------------------------------
+created by: dev.marcio.rocha@gmail.com
+date: 26-12-2022
+observation: Delphi Form Files parser
+----------------------------------------------------------
+"""
 
 # -----------------------------------------------
 # imports
@@ -10,8 +12,12 @@ import utils
 from  classes import Property
 
 # -----------------------------------------------
-# Delphi Form File Parser 
+# Delphi Form File Parser
 class DFMParser():
+    """
+    * Simple Delphi Form File parser, that extracts file properties
+    * Created by: dev.marcio.rocha@gmail.com
+    """
     # private declarations
     __file_oppened: bool    
     __file_stream = None
@@ -31,32 +37,41 @@ class DFMParser():
         self.__fields = []
 
     # -----------------------------------------------
-    # ensure that file is oppened 
     def open_file(self):
+        """
+            Method that ensire the FileStream is oppened
+        """
         if not utils.NullOrEmpty(self.file_path):
-            self.__file_stream = open(self.file_path)
+            self.__file_stream = open(self.file_path, encoding='utf-8')
         self.__file_oppened = True
         return self
 
     # -----------------------------------------------
-    # ensure that file is closed
     def close_file(self):
-        if None != self.__file_stream:
+        """
+            Method that ensure the FileStream is Closed.
+        """
+        if self.__file_stream is not None:
             self.__file_stream.close()
         self.__file_oppened = False
         self.__file_stream = None
         return self
 
     # -----------------------------------------------
-    # alter value from 
     def set_file(self, file_path: str):
+        """
+            Method that alters file of FileStream
+        """
         if self.__file_oppened:
-            self.close_file()        
+            self.close_file()
+        self.file_path = file_path
         return self
 
     # -----------------------------------------------
-    # parse atrib section
     def parse(self):
+        """
+            Parse attribute section
+        """
         if not self.__file_oppened:
             self.open_file()
         lista_atributos = Property(name='Atributos')
@@ -99,17 +114,21 @@ class DFMParser():
                 for val in item:
                     if 'fieldname' not in val.lower():
                         field.new_property(Property(name=val, value=item[val]))
-                self.__fields.append(field)              
+                self.__fields.append(field)
                 item = {}
-        self.close_file()            
+        self.close_file()
         return lista_atributos
 
     # -----------------------------------------------
-    # retorna a lista de atributos
     def get_lista_atributos(self):
+        """
+            Returns attributes list
+        """
         return self.__atributos
 
     # -----------------------------------------------
-    # retorna a lista de fields 
     def get_lista_fields(self):
+        """
+            Returns Fields List
+        """
         return self.__fields
