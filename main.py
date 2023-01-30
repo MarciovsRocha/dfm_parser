@@ -7,7 +7,7 @@
 # ----------------------------------------------------------
 # imports
 from dfmparser import DFMParser
-from utils import CriarEstruturaLocal
+from utils import criar_estrutura_local
 
 # ----------------------------------------------------------
 # CONSTANTS
@@ -27,7 +27,7 @@ parser = DFMParser(file_path = CLASSE)
 parser.parse()
 lista_atributos = parser.get_lista_atributos()
 lista_fields = parser.get_lista_fields()
-estrutura_local = CriarEstruturaLocal(lista_atributos=lista_atributos, lista_fields=lista_fields)
+estrutura_local = criar_estrutura_local(lista_atributos=lista_atributos, lista_fields=lista_fields)
 ARQUIVO_EXPORTADO = 'estrutura_local.txt'
 with open(ARQUIVO_EXPORTADO, 'w', encoding='utf-8') as fwrite:
     fwrite.write(estrutura_local)

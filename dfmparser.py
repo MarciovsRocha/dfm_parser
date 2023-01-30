@@ -41,7 +41,7 @@ class DFMParser():
         """
             Method that ensire the FileStream is oppened
         """
-        if not utils.NullOrEmpty(self.file_path):
+        if not utils.null_or_empty(self.file_path):
             self.__file_stream = open(self.file_path, encoding='utf-8')
         self.__file_oppened = True
         return self
@@ -91,7 +91,7 @@ class DFMParser():
             elif atrib_prop and item_prop and ('end' in line.lower()):
                 item_prop = False
                 atributo = Property(name=item['Nome'])
-                for val in item.items():
+                for val in item:
                     if 'nome' not in val.lower():
                         atributo.new_property(Property(name=val, value=item[val]))
                 item = {}
@@ -111,7 +111,7 @@ class DFMParser():
             elif fields_prop and ('end' in line.lower()):
                 fields_prop = False
                 field = Property(name=item['FieldName'])
-                for val in item.items():
+                for val in item:
                     if 'fieldname' not in val.lower():
                         field.new_property(Property(name=val, value=item[val]))
                 self.__fields.append(field)
