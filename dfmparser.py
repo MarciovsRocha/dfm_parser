@@ -83,7 +83,7 @@ class DFMParser():
             line = line.replace('\n', '')
             if 'atributos' in line.lower():
                 atrib_prop = True            
-            elif 'item' in line.lower():
+            elif 'item' == line.lower().replace(' ', '').strip():
                 item_prop = True
             elif atrib_prop and item_prop and ('=' in line):
                 name,value = line.replace(' ', '').replace('\'','').split('=')
