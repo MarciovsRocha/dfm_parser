@@ -1,6 +1,11 @@
 :: ------------------------------------------------
 :: excludes previous version
-del D:\Marcio\auxiliares\DFMParser.exe
+set DEPLOY_FOLDER=D:\Marcio\auxiliares
+set PROD_FOLDER=.\Product
+
+:: ------------------------------------------------
+:: excludes previous version
+del %DEPLOY_FOLDER%\DFMParser.exe
 
 :: ------------------------------------------------
 :: compiles new version
@@ -9,4 +14,4 @@ python.exe -m PyInstaller --onefile -n DFMParser --clean --distpath Product .\ma
 
 :: ------------------------------------------------
 :: deploy new compiled version 
-xcopy .\Product\DFMParser.exe D:\Marcio\auxiliares /Y
+xcopy %PROD_FOLDER%\DFMParser.exe %DEPLOY_FOLDER% /Y
